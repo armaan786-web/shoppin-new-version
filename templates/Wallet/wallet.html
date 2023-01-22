@@ -1,0 +1,120 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+{% block main-content %}
+<center><p>{% include 'Base/messages.html' %}</p></center>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-theme shadow-sm mb-4">
+            <div class="card-body">
+                <div class="card card-light mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            
+                            <div class="col align-self-center">
+                                <center>
+                                    <h5 class="mb-0">{{user.username}}</h5>
+                                
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow-sm product">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <div class="avatar avatar-50 rounded bg-danger text-white">
+                                            <i class="bi bi-credit-card"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col ps-0 align-self-center">
+                                        <span class="small text-opac mb-0">Recharge Wallet</span>
+                                        <p class="mb-1">₹ {{total_amount}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card shadow-sm product">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <div class="avatar avatar-50 rounded bg-success text-white">
+                                            <i class="bi bi-gift"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col ps-0 align-self-center">
+                                        <span class="small text-opac mb-0">Balance Wallet</span>
+                                        <p class="mb-1">₹ {{commission}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row mb-4">
+    <div class="col d-grid">
+        <a href="{% url 'recharge_history' %}" class="btn btn-info btn-lg shadow-sm">Transaction</a>
+        {% comment %} <button class="btn btn-info btn-lg shadow-sm">Transaction</button> {% endcomment %}
+    </div>
+    <div class="col d-grid">
+        <a href="{% url 'kyc' %}" class="btn btn-danger btn-lg  shadow-sm">Bank Account</a>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col d-grid">
+        <a class="btn btn-warning btn-lg shadow-sm" href="{% url 'recharge' %}">Recharge Now</a>
+        {% comment %} <button class="btn btn-warning btn-lg shadow-sm">Recharge Now</button> {% endcomment %}
+    </div>
+    <div class="col d-grid">
+        <button class="btn btn-lg btn-theme shadow-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Withdraw Now</button>
+        {% comment %} <a href="chat.html" class="btn btn-lg btn-theme shadow-sm">Withdraw Now</a> {% endcomment %}
+    </div>
+</div>
+
+<!-- experince -->
+
+
+<!-- address  -->
+
+
+
+<!-- freinds -->
+
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Withdraw</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+        <div class="modal-body">
+          <input class="form-control" type="number" placeholder="Amount" name="amount" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+{% endblock main-content %}

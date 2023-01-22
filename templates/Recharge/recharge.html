@@ -1,0 +1,252 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+{% block main-content %}
+
+
+<!-- wizard links -->
+<div class="row mb-3">
+    <center>
+        {% include 'Base/messages.html' %}
+    </center>
+
+    <!-- pricing -->
+<div class="row mb-3">
+
+    <div class="row mb-3">
+        <div class="col align-self-center">
+            <h5 class="mb-0">Step 1 Copy UPI Information</h5>
+        </div>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+    <div class="row mb-3">
+        <div class="col">
+            <p>UPI ID</p>
+        </div>
+        <div class="col-auto">
+            <input class="border-0 col-auto" type="text" id="utr" style="background:#F8EBEE; text-align: right;"  name="upi_id">
+        </div>
+    </div>
+    <div class="mb-3 col-12">
+        <div class="dashed-line"></div>
+    </div>
+   
+</div>
+
+<div class="row mb-3">
+    <div class="col">
+        <p>Amount</p>
+    </div>
+    <div class="col-auto"> 
+        <input id="amount" class=" border-0 col-auto" type="text" id="utr" style="background:#F8EBEE; text-align: right;" placeholder="₹ 0.00" name="amount" >
+    </div>
+</div>
+<hr>
+
+
+
+    <div class="col align-self-center">
+        <h5 class="mb-0">Choose Amount</h5>
+    </div>
+    
+</div>
+<div class="row mb-2">
+    <div class="col-12 col-md-6 col-lg-4">
+        <a href="#" class="card shadow-sm mb-3 product text-normal">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-auto">
+                        <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1" >
+                            <img src="{% static 'assets/img/phonepay2.png' %}" alt="" >
+                        </figure>
+                    </div>
+                    <div class="col align-self-center">
+                        <p onclick="myfunc()" id="phonepay"><strong>5999</strong></p>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        {% comment %} <i class="bi bi-chevron-right text-color-theme"></i> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
+        <a href="#" class="card shadow-sm mb-3 product text-normal">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-auto">
+                        <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1">
+                            <img src="{% static 'assets/img/visa.png' %}" alt="">
+                        </figure>
+                    </div>
+                    <div class="col align-self-center">
+                        <p onclick="myfunc2()" id="sec_amt"><strong>9999</strong></p>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        {% comment %} <i class="bi bi-chevron-right text-color-theme"></i> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
+        <a href="#" class="card shadow-sm mb-3 product text-normal">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-auto">
+                        <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1">
+                            <img src="{% static 'assets/img/americanexp.png' %}" alt="">
+                        </figure>
+                    </div>
+                    <div class="col align-self-center">
+                        <p onclick="myfunc3()" id="third_amt"><strong>10999</strong></p>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        {% comment %} <i class="bi bi-chevron-right text-color-theme"></i> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+
+<!-- Payment Proccess -->
+<div class="row mb-3">
+    <div class="col align-self-center">
+        <h5 class="mb-0">Payment Modes</h5>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-12 col-md-6 col-lg-4">
+        <a href="#" class="card shadow-sm mb-3 product text-normal">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-auto">
+                        <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1" >
+                            <img src="{% static 'assets/img/phonepay2.png' %}" alt="" >
+                        </figure>
+                    </div>
+                    <div class="col align-self-center">
+                        <p onclick="phonepay()" id="phone_pay">Phonepay<br></p>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        {% comment %} <i class="bi bi-chevron-right text-color-theme"></i> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
+        <a href="#" class="card shadow-sm mb-3 product text-normal">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-auto">
+                        <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1">
+                            <img src="{% static 'assets/img/visa.png' %}" alt="">
+                        </figure>
+                    </div>
+                    <div class="col align-self-center">
+                        <p onclick="gpay()" id="g_pay">G-Pay<br></p>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        {% comment %} <i class="bi bi-chevron-right text-color-theme"></i> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
+        <a href="#" class="card shadow-sm mb-3 product text-normal">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-auto">
+                        <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1">
+                            <img src="{% static 'assets/img/americanexp.png' %}" alt="">
+                        </figure>
+                    </div>
+                    <div class="col align-self-center">
+                        <p onclick="upi()" id="upi">Upi<br></p>
+                    </div>
+                    <div class="col-auto align-self-center">
+                        {% comment %} <i class="bi bi-chevron-right text-color-theme"></i> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+
+{% comment %} <div class="row fw-bold mb-4">
+    <div class="mb-3 col-12">
+        <div class="dashed-line"></div>
+    </div>
+    <div class="col">
+        <p>Total</p>
+    </div>
+    <div class="col-auto">$ 42.00</div>
+</div> {% endcomment %}
+
+<div class="row mb-3">
+    <div class="col align-self-center">
+        <h5 class="mb-0">Step 2 Please enter Ref No. to complete the recharge</h5>
+    </div>
+</div>
+
+<div class="mb-3 col-12">
+    <input class="form-control" type="text" name="utr_no" minlength="12" Required>
+    {% comment %} <div class="dashed-line"></div> {% endcomment %}
+</div>
+
+<!-- Button -->
+<div class="row mb-3">
+    <div class="col align-self-center d-grid">
+        <input class="btn btn-default btn-lg shadow-sm" type="submit" value="Recharge Now">
+        
+    </div>
+</div>
+
+</form>
+
+
+
+<script>
+    function myfunc(){
+        abc = document.getElementById("phonepay").innerText
+        document.getElementById("amount").value=abc
+        console.log("hello")
+    }
+    function myfunc2(){
+        abc = document.getElementById("sec_amt").innerText
+        document.getElementById("amount").value=abc
+        console.log("hello")
+    }
+    function myfunc3(){
+        abc = document.getElementById("third_amt").innerText
+        document.getElementById("amount").value=abc
+        console.log("hello")
+    }
+    function phonepay(){
+        abc = document.getElementById("phone_pay").innerText
+        document.getElementById("utr").value="phonepay@"
+        
+        console.log("hello")
+    }
+    function gpay(){
+        abc = document.getElementById("g_pay").innerText
+        document.getElementById("utr").value="gpay@"
+        console.log("hello")
+    }
+    function upi(){
+        abc = document.getElementById("upi").innerText
+        document.getElementById("utr").value="upi@"
+        console.log("hello")
+    }
+</script>
+
+
+
+{% endblock main-content %}

@@ -1,0 +1,165 @@
+{% load static %}
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="generator" content="">
+    <title>GoMobileUX V2.0 - Mobile HTML template</title>
+
+    <!-- manifest meta -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="{% static 'assets/img/favicon180.png' %}" sizes="180x180">
+    <link rel="icon" href="{% static 'assets/img/favicon32.png' %}" sizes="32x32" type="image/png">
+    <link rel="icon" href="{% static 'assets/img/favicon16.png' %}" sizes="16x16" type="image/png">
+
+    <!-- Google fonts-->
+    <link href="{% static 'css2?family=Nunito:wght@400;700&display=swap' %}" rel="stylesheet">
+    <link href="{% static 'css2-1?family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap' %}" rel="stylesheet">
+
+    <!-- bootstrap icons -->
+    <link rel="stylesheet" href="{% static 'npm/bootstrap-icons%401.5.0/font/bootstrap-icons.css' %}">
+
+    <!-- swiper css -->
+    <link rel="stylesheet" href="{% static 'assets/vendor/swiperjs-6.6.2/swiper-bundle.min.css' %}">
+
+    <!-- style css for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" id="style">
+</head>
+
+<body class="body-scroll d-flex flex-column h-100 dark-bg bg1" data-page="signup">
+
+    <!-- loader section -->
+    <div class="container-fluid loader-wrap">
+        <div class="row h-100">
+            <div class="col-10 col-md-6 col-lg-5 col-xl-3 mx-auto text-center align-self-center">
+                <div class="loader-cube-wrap mx-auto">
+                    <div class="loader-cube1 loader-cube"></div>
+                    <div class="loader-cube2 loader-cube"></div>
+                    <div class="loader-cube4 loader-cube"></div>
+                    <div class="loader-cube3 loader-cube"></div>
+                </div>
+                <p>Let's Create Difference<br><strong>Please wait...</strong></p>
+            </div>
+        </div>
+    </div>
+    <!-- loader section ends -->
+
+    <!-- Begin page content -->
+    <main class="container-fluid h-100 main-container">
+        <div class="overlay-image text-end">
+            {% comment %} <img src="{% static 'assets/img/apple.png' %}" class="orange-slice" alt=""> {% endcomment %}
+        </div>
+
+        <div class="row h-100">
+            <div class="col-12 text-center">
+                <div class="logo-small">
+                    <img src="{% static 'assets/img/logo.png' %}" alt="" class="img">
+                    {% comment %} <h6>GO<br><small></small></h6> {% endcomment %}
+                </div>
+            </div>
+            {% include 'Base/messages.html' %}
+            <div class="col-12 mx-auto text-center">
+                <div class="row h-100">
+                    <div class="col-10 col-sm-8 col-md-6 col-lg-4 col-xl-3 mx-auto align-self-center">
+                        <h2 class="text-center mb-4">Sign up</h2>
+                        <div class="card card-light shadow-sm mb-4">
+                            <div class="card-body">
+                                <form method="POST" action="{% url 'otp' %}">
+                                    {% csrf_token %}
+
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="username" placeholder="Referral Code" name="referral">
+                                        <label for="username">Referral Code</label>
+                                        {% comment %} <button type="button" class="btn btn-link text-success tooltip-btn valid-tooltip" data-bs-toggle="tooltip" data-bs-placement="left" title="Email is valid">
+                                            <i class="bi bi-check-circle"></i>
+                                        </button> {% endcomment %}
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="username" placeholder="Username" name="username" Required>
+                                        <label for="username">Username</label>
+                                        <button type="button" class="btn btn-link text-success tooltip-btn valid-tooltip" data-bs-toggle="tooltip" data-bs-placement="left" title="Email is valid">
+                                            <i class="bi bi-check-circle"></i>
+                                        </button>
+                                    </div>
+
+                                   
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control" id="mob_no" placeholder="+91" name="mob_no" Required>
+                                        <label for="mob_no">Mobile number</label>
+                                        <button type="button" class="btn btn-link text-success tooltip-btn valid-tooltip" data-bs-toggle="tooltip" data-bs-placement="left" title="Email is valid">
+                                            <i class="bi bi-check-circle"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="form-floating mb-3">
+                                        <input type="password" class="form-control" id="password" placeholder="Your Password" name="password" Required>
+                                        <label for="password">Password</label>
+                                        <button type="button" class="btn btn-link text-danger tooltip-btn invalid-tooltip" data-bs-toggle="tooltip" data-bs-placement="left" title="Enter valid password">
+                                            <i class="bi bi-exclamation-circle"></i>
+                                        </button>
+                                    </div>
+                                    <div class="d-grid">
+                                        <input class="btn btn-lg btn-default shadow-sm" type="submit" value="Sign up" id="toastprouctaddedtinybtn">
+                                    </div>
+
+                                    {% comment %} <div class="d-grid"><a href="verify.html" class="btn btn-lg btn-default shadow-sm">Sign
+                                        up</a></div>
+                                     {% endcomment %}
+
+
+                                    
+                                </form>
+
+                                
+                            </div>
+                        </div>
+                        <div class="col-12 text-center align-self-end py-2">
+                            <div class="row">
+                                <div class="col text-center">
+                                    Already have account? <a href="{% url 'signin' %}" class="btn btn-link px-0 ms-2">Sign in </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+    </main>
+
+
+
+
+    <!-- Required jquery and libraries -->
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap-5/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- cookie js -->
+    <script src="{% static 'assets/js/jquery.cookie.js' %}"></script>
+
+    <!-- swiper script -->
+    <script src="{% static 'assets/vendor/swiperjs-6.6.2/swiper-bundle.min.js' %}"></script>
+
+    <!-- page level custom script -->
+    <script src="{% static 'assets/js/app.js' %}"></script>
+
+    <!-- Customized jquery file  -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/color-scheme.js' %}"></script>
+
+    <!-- PWA app service registration and works -->
+    <script src="{% static 'assets/js/pwa-services.js' %}"></script>
+
+</body>
+
+</html>

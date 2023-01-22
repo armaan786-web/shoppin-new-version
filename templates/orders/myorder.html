@@ -1,0 +1,43 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+{% block main-content %}
+
+
+
+<div class="row mb-3">
+    <center>
+        <div class="col">
+            <h5 class="mb-0">Orders</h5>
+        </div>
+    </center>
+    <hr>
+   
+</div>
+
+<div class="row">
+    {% for i in booking %}
+    <div class="col-6 col-md-4 col-lg-3">
+        <div class="card shadow-sm product mb-4">
+            <div class="card-body">
+                <figure class="text-center">
+                    <img src="{{i.product.product_img.url}}" alt="">
+                </figure>
+                
+                {% comment %} <a href="{% url 'product_detail' i.id %}" class="text-normal">
+                    
+                </a> {% endcomment %}
+                <h6 class="text-color-theme">{{i.product.name}}</h6>
+                <div class="row">
+                    <div class="col">
+                        <p class="mb-0">₹ {{i.product.price}}<br><small class="text-opac">Daily Income ₹{{i.product.commission}}</small></p>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock main-content %}

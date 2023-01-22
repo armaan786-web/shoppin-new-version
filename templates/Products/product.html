@@ -1,0 +1,52 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+{% block main-content %}
+
+
+
+
+<div class="row mb-3">
+    <div class="col">
+        <h5 class="mb-0">Products</h5>
+    </div>
+    <div class="col-auto">
+        <a href="" class="link text-color-theme">View All <i class="bi bi-chevron-right"></i></a>
+    </div>
+</div>
+
+<div class="row">
+    {% for i in product %}
+    <div class="col-6 col-md-4 col-lg-3">
+        <div class="card shadow-sm product mb-4">
+            <div class="card-body">
+                <figure class="text-center">
+                    <img src="{{i.product_img.url}}" alt="">
+                </figure>
+                <p class="mb-1">
+                    <small class="text-opac">Validity - {{i.duration}}days</small>
+                    <small class="float-end"><span class="text-opac">4.5</span> <i class="bi bi-star-fill text-warning"></i></small>
+                </p>
+                <a href="{% url 'product_detail' i.id %}" class="text-normal">
+                    <h6 class="text-color-theme">{{i.name}}</h6>
+                </a>
+                <div class="row">
+                    <div class="col">
+                        <p class="mb-0">₹ {{i.price}}<br><small class="text-opac">Daily Income ₹{{i.commission}}</small></p>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{% url 'product_detail' i.id %}">
+                            <button class="btn btn-sm avatar avatar-30 p-0 rounded-circle shadow btn-gradient" data-bs-toggle="modal" data-bs-target="#addproductcart">
+                            <i class="bi bi-plus size-22"></i>
+                        </button>
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock main-content %}

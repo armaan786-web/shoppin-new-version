@@ -1,0 +1,30 @@
+{% extends 'Base/base.html' %}
+{% block main-content %}
+
+<div class="table-responsive">
+<table class="table ">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Income</th>
+       
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in recharge %}
+      <tr>
+        
+        {% comment %} <th scope="row">{{forloop.counter}}</th> {% endcomment %}
+        <td>abc</td>
+        <td>abc</td>
+        
+        
+        <td>{{i.recharge_request}}</td>
+    </tr>
+    {% endfor %}
+     
+    </tbody>
+  </table>
+</div>
+{% endblock main-content %}

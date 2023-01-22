@@ -1,0 +1,38 @@
+{% extends 'Base/base.html' %}
+{% block main-content %}
+<center>
+    <h1>Kyc</h1>
+</center>
+<div class="table-responsive">
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">UserName</th>
+        <th scope="col">Mobile Number</th>
+        <th scope="col">Bank Holder Name</th>
+        <th scope="col">Bank Name</th>
+        <th scope="col">A/C No</th>
+        <th scope="col">Ifsc Code</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in kyc  %}
+      <tr>
+        
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{i.user.user.first_name}}</td>
+        <td>{{i.user.mobile}}</td>
+        <td>{{i.bank_holder_name}}</td>
+        <td>{{i.bank_name}}</td>
+        <td>{{i.account_number}}</td>
+        <td>{{i.ifsc_code}}</td>
+        
+    </tr>
+    {% endfor %}
+     
+    </tbody>
+  </table>
+</div>
+{% endblock main-content %}

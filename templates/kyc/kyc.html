@@ -1,0 +1,100 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+{% block main-content %}
+
+
+
+<!-- add edit address form -->
+<center>
+    {% include 'Base/messages.html' %}
+</center>
+<div class="row mb-3">
+    <div class="col">
+        <h5 class="mb-0">Bank Account Details</h5>
+    </div>
+</div>
+<form  method="POST">
+    {% csrf_token %}
+<div class="row">
+    <div class="col-12">
+        <div class="card card-light shadow-sm mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <div class="form-group form-floating">
+                            <input type="text" class="form-control" id="address1"
+                                placeholder="Your Name" name="name">
+                            <label class="form-control-label" for="address1">Your Name</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <div class="form-group form-floating">
+                            <input type="text" class="form-control" id="address1"
+                                placeholder="Your Name" name="bank_name">
+                            <label class="form-control-label" for="address1">Bank Name</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <div class="form-group form-floating">
+                            <input type="text" class="form-control" id="address2"
+                                placeholder="Account Number" name="account_no">
+                            <label class="form-control-label" for="address2">Account Number</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                        <div class="form-group form-floating">
+                            <input type="text" class="form-control" id="address3"
+                                placeholder="Ifsc Code" name="ifsc_code">
+                            <label class="form-control-label" for="address3">Ifsc Code</label>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row h-100 mb-4">
+    <input class="btn btn-lg btn-default shadow-sm" type="submit" value="Update">
+    {% comment %} <div class="col-12 d-grid"><a href="settings.html" target="_self"
+            class="btn btn-lg btn-default shadow-sm">Update</a></div> {% endcomment %}
+</div>
+
+</form>
+
+
+
+
+
+<table class="table">
+    <thead>
+      <tr>
+        
+        <th scope="col">Bank Holder Name</th>
+        <th scope="col">Bank Name</th>
+        <td scope="col">Account Number</td>
+        <td scope="col">Ifsc Code</td>
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in kyc %}
+      <tr>
+        
+        
+        <td>{{i.bank_holder_name}}</td>
+        <td>{{i.bank_name}}</td>
+        <td>{{i.account_number}}</td>
+        
+        <td>{{i.ifsc_code}}</td>
+    </tr>
+    {% endfor %}
+  
+
+
+{% endblock main-content %}

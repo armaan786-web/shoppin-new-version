@@ -1,0 +1,92 @@
+<div class="rightbar-wrap">
+    <div class="rightbar">
+        <div class="row align-items-center mb-4">
+            <div class="col-auto">
+                <div class="avatar avatar-44 rounded-circle bg-light-white"><i class="bi bi-sliders"></i></div>
+            </div>
+            <div class="col">
+                <h5 class="mb-0">Filter</h5>
+                <p class="text-muted">Set your choices</p>
+            </div>
+        </div>
+
+        <!-- filter fields -->
+        <div class="mb-4">
+            <h6>Select Range</h6>
+            <div id="rangeslider" class="mt-4"></div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <div class="form-group mb-2 position-relative">
+                        <div class="form-floating">
+                            <input type="text" placeholder="From" value="0" required="" class="form-control text-white" id="input-select">
+                            <label>From</label>
+                        </div>
+                    </div>
+                    <div class="invalid-feedback mb-3">Enter valid data </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <div class="form-group mb-2 position-relative">
+                        <div class="form-floating">
+                            <input type="text" placeholder="To" value="1000" required="" class="form-control text-white" id="input-number">
+                            <label>To</label>
+                        </div>
+                    </div>
+                    <div class="invalid-feedback mb-3">Enter valid data </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="form-group mb-2 position-relative">
+                <div class="form-floating">
+                    <select class="form-control multichosen" multiple="">
+                        <option value="Apple">Apple</option>
+                        <option value="Banana">Banana</option>
+                        <option value="Mango">Mango</option>
+                        <option value="Orange">Orange</option>
+                        <option value="Kiwi">Kiwi</option>
+                        <option value="Pineapple">Pineapple</option>
+                    </select>
+                    <label>From</label>
+                </div>
+            </div>
+            <div class="invalid-feedback text-white mb-3">Max. 2 selection allowed </div>
+        </div>
+        <div class="mb-3">
+            <div class="form-group mb-2 position-relative">
+                <div class="form-floating">
+                    <input type="text" placeholder="Keyword" value="1000" required="" class="form-control text-white">
+                    <label>Keyword</label>
+                </div>
+            </div>
+            <div class="invalid-feedback mb-3">Enter valid data </div>
+        </div>
+        <div class="mb-4">
+            <div class="form-group mb-2 position-relative">
+                <div class="form-floating">
+                    <div class="form-floating">
+                        <select class="form-select">
+                            <option value="20">20</option>
+                            <option value="10">10</option>
+                            <option value="80">80</option>
+                            <option value="70">70</option>
+                        </select>
+                        <label>Discount</label>
+                    </div>
+                </div>
+            </div>
+            <div class="invalid-feedback mb-3">Enter valid data </div>
+        </div>
+        <!-- filter fields ends-->
+
+        <button class="btn btn-white btn-rounded shadow-sm w-100 filter-btn">Apply</button>
+    </div>
+
+
+    <button class="btn btn-white btn-sm btn-square-sm rounded-circle position-absolute start-0 end-0 bottom-0 mx-auto filter-btn mb-3">
+        <i class="bi bi-x-lg"></i>
+    </button>
+</div>

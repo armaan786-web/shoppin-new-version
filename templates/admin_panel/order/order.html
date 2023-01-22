@@ -1,0 +1,73 @@
+{% extends 'Base/base.html' %}
+{% block main-content %}
+<center>
+    <h1>Order</h1>
+</center>
+<div class="table-responsive">
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Mobile No</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">description</th>
+        <th scope="col">duration</th>
+        <th scope="col">commission</th>
+        <th scope="col">Daily Commission</th>
+        <th scope="col">product_img</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in booking  %}
+      <tr>
+        
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{i.user.user.first_name}}</td>
+        <td>{{i.user.mobile}}</td>
+        <td>{{i.product.name}}</td>
+        <td>{{i.product.price}}</td>
+        <td>{{i.product.description}}</td>
+        <td>{{i.product.duration}} days</td>
+        <td>{{i.product.commission}}%</td>
+        <td>{{i.update_user_total_commission}}</td>
+        <td><img src="{{i.product.product_img.url}}" alt="dd" class="w-25"></td>
+        <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{i.id}}">Add Commission</button></td>
+    </tr>
+
+    <!-- Modal -->
+<div class="modal fade" id="staticBackdrop{{i.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Daily Commission</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form  method="POST" >
+          {% csrf_token %}
+         <input type="text" value="{{i.id}}" name="prod_id">
+          <input type="number" class="form-control" name="commission">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Understood</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+     
+    </tbody>
+  </table>
+</div>
+
+<!-- Button trigger modal -->
+
+
+
+{% endblock main-content %}

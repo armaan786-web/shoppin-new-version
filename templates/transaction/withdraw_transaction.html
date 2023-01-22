@@ -1,0 +1,30 @@
+{% extends 'Base/base.html' %}
+{% block main-content %}
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">A/C</th>
+        <th scope="col">Amount</th>
+        <td scope="col">Date</td>
+        <td scope="col">Status</td>
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in recharge %}
+      <tr>
+        
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{i.upi_id}}</td>
+        <td>{{i.amount}}</td>
+        <td>{{i.date}}</td>
+        
+        <td>{{i.recharge_request}}</td>
+    </tr>
+    {% endfor %}
+     
+    </tbody>
+  </table>
+
+{% endblock main-content %}

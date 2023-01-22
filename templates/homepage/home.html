@@ -1,0 +1,169 @@
+{% extends 'Base/base.html' %}
+{% load static %}
+{% block main-content %}
+
+
+
+
+<div class="row">
+    <div class="col-12 col-md-10 col-lg-8 mx-auto">
+        
+
+        <figure class="overflow-hidden rounded text-center">
+            <img src="{% static 'assets/img/news3.jpg' %}" alt="" class="mw-100 mx-auto">
+        </figure>
+
+    
+        <div class="row mb-4 ">
+            <div class="col-6  d-grid">
+                <a href="{% url 'aboutus' %}" class="btn btn-default btn-lg shadow-sm">About Us</a>
+                
+            </div>
+            <div class="col-6 d-grid">
+                <a href="{% url 'guide' %}" class="btn btn-lg btn-theme shadow-sm">GUIDE</a>
+            </div>
+            
+        </div>
+        
+    
+        <div class="row mb-4 ">
+            {% comment %} <div class="col-6  d-grid">
+                <button class="btn btn-warning btn-lg shadow-sm">Refer</button>
+            </div> {% endcomment %}
+            <div class="col-12 d-grid">
+                <a href="{% url 'contact' %}" class="btn btn-info btn-lg shadow-sm">Contact Us</a>
+            </div>
+            
+        </div>
+
+
+        <h5>Best class template with details</h5>
+        <p class="text-opac">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+            printer took a galley of type and scrambled it to make a type specimen book.</p>
+
+        <div class="row">
+            <div class="col-12">
+                <figure class="overflow-hidden rounded text-center">
+                    <img src="{% static 'assets/img/news1.jpg' %}" alt="" class="w-100 mx-auto">
+                </figure>
+            </div>
+          
+        </div>
+
+
+
+
+  
+        
+
+
+
+        
+<div class="row mb-3">
+    <div class="col">
+        <h5 class="mb-0">Today </h5>
+        
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-12 col-md-6 mb-3">
+        <div class="row">
+            <div class="col-5">
+                <figure class="rounded position-relative h-190 overflow-hidden shadow-sm">
+                    <div class="coverimg h-100 w-100 position-absolute start-0 top-0">
+                        <img src="{% static 'assets/img/news1.jpg' %}" alt="">
+                    </div>
+                </figure>
+            </div>
+            <div class="col align-self-center">
+                <a href="blogdetails.html" class="h5 d-block text-normal text-color-theme">Maxartkiller has awesome templae
+                    to start</a>
+                <p class="text-opac">Lorem ipsum dolor sit amet, consect etur adipiscing elit.
+                    Sndisse conv allis.</p>
+                <a href="blogdetails.html" class="text-normal">Read More <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+        <div class="row">
+            <div class="col-5">
+                <figure class="rounded position-relative h-190 overflow-hidden shadow-sm">
+                    <div class="coverimg h-100 w-100 position-absolute start-0 top-0">
+                        <img src="{% static 'assets/img/news2.jpg' %}" alt="">
+                    </div>
+                </figure>
+            </div>
+            <div class="col align-self-center">
+                <a href="blogdetails.html" class="h5 d-block text-normal text-color-theme">For the people by people Best
+                    Mobile template is here</a>
+                <p class="text-opac">Lorem ipsum dolor sit amet, consect etur adipiscing elit.
+                    Sndisse conv allis.</p>
+                <a href="blogdetails.html" class="text-normal">Read More <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+        <div class="row">
+            <div class="col-5">
+                <figure class="rounded position-relative h-190 overflow-hidden shadow-sm">
+                    <div class="coverimg h-100 w-100 position-absolute start-0 top-0">
+                        <img src="{% static 'assets/img/news3.jpg' %}" alt="">
+                    </div>
+                </figure>
+            </div>
+            <div class="col align-self-center">
+                <a href="blogdetails.html" class="h5 d-block text-normal text-color-theme">Maxartkiller has awesome templae
+                    to start</a>
+                <p class="text-opac">Lorem ipsum dolor sit amet, consect etur adipiscing elit.
+                    Sndisse conv allis.</p>
+                <a href="blogdetails.html" class="text-normal">Read More <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+        <div class="row">
+            <div class="col-5">
+                <figure class="rounded position-relative h-190 overflow-hidden shadow-sm">
+                    <div class="coverimg h-100 w-100 position-absolute start-0 top-0">
+                        <img src="{% static 'assets/img/news1.jpg' %}" alt="">
+                    </div>
+                </figure>
+            </div>
+            <div class="col align-self-center">
+                <a href="blogdetails.html" class="h5 d-block text-normal text-color-theme">For the people by people Best
+                    Mobile template is here</a>
+                <p class="text-opac">Lorem ipsum dolor sit amet, consect etur adipiscing elit.
+                    Sndisse conv allis.</p>
+                <a href="blogdetails.html" class="text-normal">Read More <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+        
+
+       
+        
+
+       
+      
+        
+    </div>
+
+
+    
+</div>
+
+
+
+
+
+{% endblock main-content %}
