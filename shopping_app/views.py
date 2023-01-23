@@ -299,7 +299,8 @@ def booking(request):
     print("sssss",product_id)
     product = Prodcut.objects.get(id=product_id)
     Booking(user=user,product=product).save()
-    return redirect('home')
+    messages.success(request,"Your Product is Successfully Purchased !!!")
+    return redirect('myorder')
 
 
 def myorder(request):

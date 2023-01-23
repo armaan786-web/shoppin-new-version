@@ -13,10 +13,10 @@
             </div>
         </div>
         <div class="col-auto align-self-center">
-            <span>Welcome {{user.first_name}}</span>
-            {% comment %} <a href="profile.html" class="link text-color-theme">
+            
+             <a href="{% url 'profile' %}" class="link text-color-theme">
                 <i class="bi bi-person-circle size-22"></i>
-            </a> {% endcomment %}
+            </a> 
         </div>
     </div>
 </header>

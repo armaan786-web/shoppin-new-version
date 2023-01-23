@@ -16,8 +16,8 @@
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" href="{% static 'assets/img/favicon180.png' %}" sizes="180x180">
-    <link rel="icon" href="{% static 'assets/img/favicon32.png' %}" sizes="32x32" type="image/png">
-    <link rel="icon" href="{% static 'assets/img/favicon16.png' %}" sizes="16x16" type="image/png">
+    {% comment %} <link rel="icon" href="{% static 'assets/img/favicon32.png' %}" sizes="32x32" type="image/png">
+    <link rel="icon" href="{% static 'assets/img/favicon16.png' %}" sizes="16x16" type="image/png"> {% endcomment %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
     <!-- Google fonts-->
@@ -25,7 +25,9 @@
     <link href="{% static 'css2-1?family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap' %}" rel="stylesheet">
 
     <!-- bootstrap icons -->
-    <link rel="stylesheet" href="{% static 'npm/bootstrap-icons%401.5.0/font/bootstrap-icons.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/bootsstrap_icons.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'npm/bootstrap-icons%401.5.0/font/bootstrap-icons.css' %}"> {% endcomment %}
 
     <!-- nouislider CSS -->
     <link href="{% static 'assets/vendor/nouislider/nouislider.min.css' %}" rel="stylesheet">
