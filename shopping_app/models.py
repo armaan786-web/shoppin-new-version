@@ -55,19 +55,30 @@ class Recharge(models.Model):
     user = models.ForeignKey(to=Profile,on_delete=CASCADE)
     upi_id = models.CharField(max_length=100)
     amount = models.PositiveIntegerField()
-    # amount_total = models.PositiveIntegerField()
     utr = models.CharField(max_length=100)
     date = models.DateField(auto_now_add=True)
+    remaining_amount = models.PositiveIntegerField(default=0)
+    total_amount = models.PositiveIntegerField(default=0)
     recharge_request = models.CharField(max_length=50,choices=recharge_request,default="Pending")
 
-
-    # @property
-    # def amount_total(self):
-    #     return math.floor(self.amount)+(self.amount_total)
-    def __str__(self):
-        return self.user.user.username
+    @property
+    def total_cost(self):
+        user_recharge = Recharge.objects.filter(user=self.user,recharge_request="Accept")
+        total_amount= sum(booking.amount for booking in user_recharge)   
+        # total_amount = total_amount-self.remaining_amount
     
+        return total_amount
 
+    @property
+    def remaing_amt(self):
+        
+        return self.remaing_amt-self.remaining_amount
+        
+        
+        # return self.total_cost-self.remaining_amount
+        
+    
+       
 class Booking(models.Model):
     user = models.ForeignKey(Profile,on_delete=models.CASCADE)
     product = models.ForeignKey(Prodcut,on_delete=models.CASCADE)

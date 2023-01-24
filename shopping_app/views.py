@@ -34,16 +34,19 @@ def product_detail(request,id):
 
 @login_required(login_url="signin")
 def wallet(request):
-    
+    user = Profile.objects.get(user=request.user)
     
         # print("sssssssss",daily_commission)
     total_amount = 0
-    recharge = Recharge.objects.all()
+    recharge = Recharge.objects.filter(user=user)
     if recharge:
         for p in recharge:
             if p.recharge_request == "Accept":
+                if p.remaining_amount !=0:
+                    total_amount = p.remaining_amount
+                else:
+                    total_amount = p.amount
 
-                total_amount += p.amount
     user2 = Profile.objects.get(user=request.user)
    
     
@@ -248,7 +251,8 @@ def profile(request):
 
 
 def recharge(request):
-    profile=Profile.objects.get(user=request.user)
+    
+    
     
     if request.method == "POST":
         upi_id = request.POST.get('upi_id')
@@ -260,16 +264,12 @@ def recharge(request):
             
         if amount == "":
             messages.error(request,"Choose Your Amount")
-            return redirect('recharge')
-
-        
-
-        
-            
+            return redirect('recharge')      
             
         try:
+            user=Profile.objects.get(user=request.user)
             
-            recharge = Recharge.objects.create(user=profile,upi_id=upi_id,amount=amount,utr=utr_no)
+            recharge = Recharge.objects.create(user=user,upi_id=upi_id,amount=amount,utr=utr_no)
 
             recharge.save()
             messages.success(request,"Recharge Request Sent Successfully")
@@ -284,7 +284,8 @@ def recharge(request):
     return render(request,'Recharge/recharge.html')    
 
 def recharge_history(request):
-    recharge = Recharge.objects.all()
+    user = Profile.objects.get(user=request.user)
+    recharge = Recharge.objects.filter(user=user)
     return render(request,'transaction/recharge_history.html',{'recharge':recharge})
 
 def withdraw_transaction(request):
@@ -294,13 +295,52 @@ def withdraw_transaction(request):
 
 
 def booking(request):
+
     user = Profile.objects.get(user=request.user)
+    
+   
+    total_amount = 0
+    recharge = Recharge.objects.filter(user=user)
     product_id = request.GET.get('prod_id')
-    print("sssss",product_id)
+    product_price = int(request.GET.get('price'))
+    
+    
     product = Prodcut.objects.get(id=product_id)
-    Booking(user=user,product=product).save()
-    messages.success(request,"Your Product is Successfully Purchased !!!")
-    return redirect('myorder')
+    if recharge:
+        for p in recharge:
+            
+            if p.recharge_request == "Accept":
+                # remaining_amount = p.total_cost - product_price
+                if p.remaining_amount!=0:
+                    remaining_amount = p.remaining_amount - product_price
+                    p.remaining_amount = remaining_amount
+                    p.save()
+                else:
+                    remaining_amount = p.total_cost-product_price
+                    p.remaining_amount = remaining_amount
+                    p.save()
+
+                
+
+                total_amount += p.amount
+        if total_amount>=product.price:
+            
+            # total_cost = int(p.total_cost - product_price)
+            # print("tttttttttttttt",total_cost)
+            # p.total_cost = total_cost
+            # p.save()
+            Booking(user=user,product=product).save()
+            messages.success(request,"Your Product is Successfully Purchased !!!")
+            return redirect('myorder')
+        else:
+            messages.error(request,"Insufficient Balance")
+            return redirect('product')
+    else:
+
+        return redirect('product')
+
+
+    
 
 
 def myorder(request):

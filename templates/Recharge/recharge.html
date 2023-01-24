@@ -57,11 +57,11 @@
                 <div class="row">
                     <div class="col-auto">
                         <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1" >
-                            <img src="{% static 'assets/img/phonepay2.png' %}" alt="" >
+                            <img src="{% static 'assets/img/rupee.png' %}" alt="" >
                         </figure>
                     </div>
                     <div class="col align-self-center">
-                        <p onclick="myfunc()" id="phonepay"><strong>5999</strong></p>
+                        <p onclick="myfunc()" id="phonepay"><strong>1000</strong></p>
                     </div>
                     <div class="col-auto align-self-center">
                         {% comment %} <i class="bi bi-chevron-right text-color-theme"></i> {% endcomment %}
@@ -76,11 +76,11 @@
                 <div class="row">
                     <div class="col-auto">
                         <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1">
-                            <img src="{% static 'assets/img/visa.png' %}" alt="">
+                            <img src="{% static 'assets/img/rupee.png' %}" alt="">
                         </figure>
                     </div>
                     <div class="col align-self-center">
-                        <p onclick="myfunc2()" id="sec_amt"><strong>9999</strong></p>
+                        <p onclick="myfunc2()" id="sec_amt"><strong>3600</strong></p>
                     </div>
                     <div class="col-auto align-self-center">
                         {% comment %} <i class="bi bi-chevron-right text-color-theme"></i> {% endcomment %}
@@ -95,12 +95,33 @@
                 <div class="row">
                     <div class="col-auto">
                         <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1">
-                            <img src="{% static 'assets/img/americanexp.png' %}" alt="">
+                            <img src="{% static 'assets/img/rupee.png' %}" alt="">
                         </figure>
                     </div>
                     <div class="col align-self-center">
-                        <p onclick="myfunc3()" id="third_amt"><strong>10999</strong></p>
+                        <p onclick="myfunc3()" id="third_amt"><strong>6000</strong></p>
                     </div>
+                    
+                    <div class="col-auto align-self-center">
+                        {% comment %} <i class="bi bi-chevron-right text-color-theme"></i> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
+        <a href="#" class="card shadow-sm mb-3 product text-normal">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-auto">
+                        <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1">
+                            <img src="{% static 'assets/img/rupee.png' %}" alt="">
+                        </figure>
+                    </div>
+                    <div class="col align-self-center">
+                        <p onclick="myfunc4()" id="forth_amt"><strong>12000</strong></p>
+                    </div>
+                    
                     <div class="col-auto align-self-center">
                         {% comment %} <i class="bi bi-chevron-right text-color-theme"></i> {% endcomment %}
                     </div>
@@ -124,9 +145,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-auto">
-                        <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1" >
+                        {% comment %} <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1" >
                             <img src="{% static 'assets/img/phonepay2.png' %}" alt="" >
-                        </figure>
+                        </figure> {% endcomment %}
                     </div>
                     <div class="col align-self-center">
                         <p onclick="phonepay()" id="phone_pay">Phonepay<br></p>
@@ -143,9 +164,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-auto">
-                        <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1">
+                        {% comment %} <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1">
                             <img src="{% static 'assets/img/visa.png' %}" alt="">
-                        </figure>
+                        </figure> {% endcomment %}
                     </div>
                     <div class="col align-self-center">
                         <p onclick="gpay()" id="g_pay">G-Pay<br></p>
@@ -162,9 +183,9 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-auto">
-                        <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1">
+                        {% comment %} <figure class="text-center mb-0 avatar avatar-40 page-bg rounded p-1">
                             <img src="{% static 'assets/img/americanexp.png' %}" alt="">
-                        </figure>
+                        </figure> {% endcomment %}
                     </div>
                     <div class="col align-self-center">
                         <p onclick="upi()" id="upi">Upi<br></p>
@@ -227,22 +248,27 @@
     function myfunc3(){
         abc = document.getElementById("third_amt").innerText
         document.getElementById("amount").value=abc
-        console.log("hello")
+        
+    }
+    function myfunc4(){
+        abc = document.getElementById("forth_amt").innerText
+        document.getElementById("amount").value=abc
+        
     }
     function phonepay(){
         abc = document.getElementById("phone_pay").innerText
-        document.getElementById("utr").value="phonepay@"
+        document.getElementById("utr").value="deen00758@axl"
         
         console.log("hello")
     }
     function gpay(){
         abc = document.getElementById("g_pay").innerText
-        document.getElementById("utr").value="gpay@"
+        document.getElementById("utr").value="deen00758@ibl"
         console.log("hello")
     }
     function upi(){
         abc = document.getElementById("upi").innerText
-        document.getElementById("utr").value="upi@"
+        document.getElementById("utr").value="deen00758@ybl"
         console.log("hello")
     }
 </script>

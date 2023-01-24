@@ -51,6 +51,7 @@
         <h4 class="text-color-theme mb-3">{{product.name}}</h4>
         <div class="row mb-4">
             <div class="col">
+                <input type="hidden" value="{{product.price}}" name="price">
                 <h5 class="mb-0">₹{{product.price}}.00 <s class="text-opac fw-light">₹20.00</s></h5>
                 <p class="text-opac">Daily Income ₹{{product.commission}}</p>
             </div>

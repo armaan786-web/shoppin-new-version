@@ -13,7 +13,7 @@ class ProductModelAdmin(admin.ModelAdmin):
 
 @admin.register(Recharge)
 class RechargeModelAdmin(admin.ModelAdmin):
-    list_display = ['user', 'upi_id', 'amount', 'utr', 'date','recharge_request']
+    list_display = ['user', 'upi_id', 'amount', 'utr', 'date','recharge_request','total_cost','remaining_amount']
 
 @admin.register(Kyc)
 class RechargeModelAdmin(admin.ModelAdmin):
