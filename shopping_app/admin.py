@@ -28,7 +28,7 @@ class RechargeModelAdmin(admin.ModelAdmin):
 
 class BookAdmin(admin.ModelAdmin):
     model = Booking
-    list_display = ['id', 'user', 'product','booking_Date']
+    list_display = ['id', 'user', 'product','booking_Date','total_purchase']
 
     def get_name(self, obj):
         return obj.product.name
@@ -41,3 +41,4 @@ class BookAdmin(admin.ModelAdmin):
 admin.site.register(Booking, BookAdmin)
 admin.site.register(Wallet)
 admin.site.register(CouponCode)
+admin.site.register(Withdraw)

@@ -4,11 +4,13 @@ from django.contrib import messages
 from shopping_app.EmailBackEnd import EmailBackEnd
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Prodcut,Recharge,Profile,Booking,Kyc,Wallet,CouponCode
+from .models import Prodcut,Recharge,Profile,Booking,Kyc,Wallet,CouponCode,Withdraw
 from django.db.models import Q
 import random,math
 import requests
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.core.paginator import Paginator,EmptyPage
 
 # Create your views here.
 @login_required(login_url="signin")
@@ -32,43 +34,50 @@ def product_detail(request,id):
     return render(request,'Products/product_detail.html',{'product':product})
 
 
+
 @login_required(login_url="signin")
 def wallet(request):
     user = Profile.objects.get(user=request.user)
-    
-        # print("sssssssss",daily_commission)
     total_amount = 0
-    recharge = Recharge.objects.filter(user=user)
+    total_recharge = 0
+    abb = 0
+    recharge = Recharge.objects.filter(user=user,recharge_request="Accept")
+    totalpurchase = Booking.objects.filter(user=user)
+    
+    if totalpurchase:
+        
+        for pur in totalpurchase:
+            abb = pur.total_purchase
+            # print("ourrrrrrrrr",pur.total_purchase)
     if recharge:
         for p in recharge:
-            if p.recharge_request == "Accept":
-                if p.remaining_amount !=0:
-                    total_amount = p.remaining_amount
-                else:
-                    total_amount = p.amount
-
+            total_recharge = p.total_cost
+    c =0
+    c = total_recharge - abb  
+    
+    
     user2 = Profile.objects.get(user=request.user)
-   
-    
+    withdraw = Withdraw.objects.filter(user=user2,withdraw_request="Accept")
     balance_wallet = Booking.objects.filter(user=user2)
-    daily_commission = sum(booking.daily_wise_commission for booking in balance_wallet)
+    user_gift = CouponCode.objects.filter(user=user2,coupen_request="Accept")
+    
+    
+    total_wallet = sum(wallet.amount for wallet in withdraw)
     
    
-    # wll = Wallet.objects.get(user=user2)
-        
-    if request.method == "POST":
-        amount = int(request.POST.get('amount'))
-        
-        
-        if amount <= 1000 | amount > daily_commission:
-            messages.warning(request,"Insufficient Balance")
-            return redirect('wallet')
+    daily_commission = sum(booking.daily_wise_commission for booking in balance_wallet)
+    total_gift= sum(coupon.gift_amt for coupon in user_gift)   
+    total_balance_wallet = (daily_commission+total_gift) - total_wallet
+    
         
         # wallet = Wallet.objects.create()
     
     context = {
     'total_amount':total_amount,
-    'commission':daily_commission
+    'commission':daily_commission,
+    'total_recharge':total_recharge,
+    'c':c,
+    'total_balance_wallet':total_balance_wallet
     }
         
     return render(request,'Wallet/wallet.html',context)
@@ -289,55 +298,109 @@ def recharge_history(request):
     return render(request,'transaction/recharge_history.html',{'recharge':recharge})
 
 def withdraw_transaction(request):
-    recharge = Recharge.objects.all()
-    return render(request,'transaction/withdraw_transaction.html',{'recharge':recharge})
+    # recharge = Recharge.objects.all()
+    return render(request,'transaction/withdraw_transaction.html')
 
 
 
 def booking(request):
-
     user = Profile.objects.get(user=request.user)
     
-   
+    abb = 0
+
     total_amount = 0
-    recharge = Recharge.objects.filter(user=user)
+    recharge = Recharge.objects.filter(user=user,recharge_request="Accept")
+    totalpurchase = Booking.objects.filter(user=user)
+    # bookingg = Booking.objects.filter(user=user)
     product_id = request.GET.get('prod_id')
     product_price = int(request.GET.get('price'))
     
-    
+    rem = 0
     product = Prodcut.objects.get(id=product_id)
     if recharge:
         for p in recharge:
-            
-            if p.recharge_request == "Accept":
-                # remaining_amount = p.total_cost - product_price
-                if p.remaining_amount!=0:
-                    remaining_amount = p.remaining_amount - product_price
-                    p.remaining_amount = remaining_amount
-                    p.save()
-                else:
-                    remaining_amount = p.total_cost-product_price
-                    p.remaining_amount = remaining_amount
-                    p.save()
+            rem = p.total_cost
+    
+   
+    # if rem>=product_price:
+    #     Booking(user=user,product=product).save()
 
+    if totalpurchase:
+        for pur in totalpurchase:
+            abb = pur.total_purchase
+               
+    c =0
+    c = (rem - abb)
+   
+
+    if c != "" :
+        if c>=product_price:
+            Booking(user=user,product=product).save()
+            messages.success(request,"Your Product is Purchased Successfully")
+            return redirect('myorder')
+            # if Booking.objects.filter(user=user, product=product).exists():
+            #     messages.error(request,"Your Product is already Purchased")
+            #     return redirect('product')
+            # else:      
+        else:
+            messages.error(request,"Insufficient Balance ")
+            return redirect('product')
+        
+    elif rem>=product_price:
+        Booking(user=user,product=product).save()
+        messages.success(request,"Your Product is Purchased Successfully")
+        return redirect('myorder')
+
+    else:
+        messages.error(request,"Insufuccient Balance")
+        return redirect('product')
+    
+
+
+
+            # if p.total_cost>=product_price:
+            #     # p.total_cost = p.total_cost-product_price
+            #     # p.save()
                 
+            # remaining_amount = p.total_cost - product_price
+                
+                    
+        #         if p.remaining_amount>=product_price:
+        #             remaining_amount = p.remaining_amount - product_price
+        #             p.remaining_amount = remaining_amount
+        #             p.save()
+        #         else:
+        #             messages.error(request,"Insufficient Balance")
+        #             return redirect('product')
+        #     else:
+        #         rem = p.total_cost-product_price
+        #         print("ssssssssssssssssssssssssssss",rem)
+        #         p.remaining_amount = rem
+        #         # p.remaing_amt
+        #         p.save()
+        # else:
+        #     messages.error(request,"Insufficient Balance")
+        #     return redirect('product')
+    return redirect('product')
 
-                total_amount += p.amount
-        if total_amount>=product.price:
+        
+
+        #     total_amount += p.amount
+        # if total_amount>=product.price:
             
             # total_cost = int(p.total_cost - product_price)
             # print("tttttttttttttt",total_cost)
             # p.total_cost = total_cost
             # p.save()
-            Booking(user=user,product=product).save()
-            messages.success(request,"Your Product is Successfully Purchased !!!")
-            return redirect('myorder')
-        else:
-            messages.error(request,"Insufficient Balance")
-            return redirect('product')
-    else:
+        #     Booking(user=user,product=product).save()
+        #     messages.success(request,"Your Product is Successfully Purchased !!!")
+        #     return redirect('myorder')
+        # else:
+        #     messages.error(request,"Insufficient Balance")
+        #     return redirect('product')
+    # else:
 
-        return redirect('product')
+    #     return redirect('product')
 
 
     
@@ -378,15 +441,16 @@ def commision(request):
 def admin_orders(request):
     booking = Booking.objects.all()
     if request.method == "POST":
-        commission2 = request.POST.get('commission')
-        id = request.POST.get('prod_id')
-        
-        book = Booking.objects.get(id=id)
-        
-        book.daily_wise_commission=commission2
-       
-        book.save()
+        booking_id = request.POST.get('booking_id')
+        commission_amt = request.POST.get('commission_amt')       
+        wallet=Booking.objects.get(id=booking_id)        
+        wallet.daily_wise_commission= commission_amt
+        wallet.save()
+        return redirect('adminorder')
+    
     return render(request,'admin_panel/order/order.html',{'booking':booking})
+
+
 
 def admin_kyc(request):
     kyc = Kyc.objects.all()
@@ -414,7 +478,8 @@ def recharge_rejected(request,id):
 
 
 def walletrequest(request):
-    wallet=Wallet.objects.all()
+   
+    wallet=Withdraw.objects.all()
     
     return render(request,'admin_panel/walletRequest/wallet.html',{'wallet':wallet})
 
@@ -435,7 +500,14 @@ def walletreject(request,id):
 #     return redirect('adminorder')
 
 
-
+def admin_all_users(request):
+    profile = Profile.objects.all()
+    paginator = Paginator(profile, 5)
+    page = request.GET.get('page')
+    profiles = paginator.get_page(page)
+    
+    return render(request,'admin_panel/user/all_users.html',{'profile':profile,'profiles':profiles})
+    
 def team_list(request):
     # profile = Profile.objects.filter(referral_id=request.user)
     profile = Profile.objects.filter(refer_by=request.user.profile.referral_id)
@@ -465,4 +537,73 @@ def coupon(request):
 
 def gift_request(request):
     coupon = CouponCode.objects.all()
+    if request.method == "POST":
+        id = request.POST.get('gift_id')
+        gift_amt = request.POST.get('gift_amt')
+        coupon_id = CouponCode.objects.get(id=id)
+        coupon_id.gift_amt = gift_amt
+        coupon_id.save()
+    
     return render(request,'admin_panel/gift_request.html',{'coupon':coupon})
+
+
+def gift_accept(request,id):
+    
+    gift_accept=CouponCode.objects.get(id=id)
+    gift_accept.coupen_request= "Accept"
+    gift_accept.save()
+    return redirect('gift_request')
+
+def gift_reject(request,id):
+    
+    gift_accept=CouponCode.objects.get(id=id)
+    gift_accept.coupen_request= "Reject"
+    gift_accept.save()
+    return redirect('gift_request')
+
+def withdraw(request):
+    
+    user = Profile.objects.get(user=request.user)
+    if request.method == "POST":
+        
+        amount = int(request.POST.get('amount'))
+
+        balance_wallet = Booking.objects.filter(user=user)
+        daily_commission = sum(booking.daily_wise_commission for booking in balance_wallet)
+        user_gift = CouponCode.objects.filter(user=user,coupen_request="Accept")
+        total_gift= sum(coupon.gift_amt for coupon in user_gift)   
+        withdraw = Withdraw.objects.filter(user=user,withdraw_request="Accept")
+        total_wallet = sum(wallet.amount for wallet in withdraw)
+        
+        total_balance_wallet = daily_commission+total_gift - total_wallet  
+        print("total balance wallent", total_balance_wallet)     
+    
+        
+        
+        
+        if amount <= total_balance_wallet:
+            withdraw = Withdraw.objects.create(user=user,amount=amount)
+            withdraw.save()
+            messages.success(request,"Withdraw Request Sent")
+            return redirect('wallet')
+        else:
+            messages.error(request,"Insufficient Balance")
+            return redirect('wallet')
+
+        
+    return redirect('wallet')
+
+
+
+
+def withdraw_accept(request,id):
+    wallet=Withdraw.objects.get(id=id)
+    wallet.withdraw_request= "Accept"
+    wallet.save()
+    return redirect('walletrequest')
+
+def withdraw_reject(request,id):
+    wallet=Withdraw.objects.get(id=id)
+    wallet.withdraw_request= "Reject"
+    wallet.save()
+    return redirect('walletrequest')

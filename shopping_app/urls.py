@@ -52,6 +52,7 @@ urlpatterns = [
     # ------------------------ Admin Url -------------------
     # path("admin/login",views.admin_login,name="admin_login"),
     path('admin_booking',views.admin_orders,name="adminorder"),
+    # path('editcommission/<int:id>',views.editcommission,name="editcommission"),
     path('admin_kyc',views.admin_kyc,name="admin_kyc"),
     path('admin_recharge',views.admin_recharge,name="admin_recharge"),
     path('recharge_status/<int:id>',views.recharge_status,name="recharge_status"),
@@ -59,7 +60,7 @@ urlpatterns = [
     path('walletRequest',views.walletrequest,name="walletrequest"),
     path('walletreject/<int:id>',views.walletreject,name="walletreject"),
     # path('dailywise_commission/<int:id>',views.dailywise_commission,name="dailywise_commission"),
-    
+    path('all/users',views.admin_all_users,name="admin_all_users"),
 
     # ---------------------------------- Team ---------------------------- 
 
@@ -73,6 +74,14 @@ urlpatterns = [
     path('aboutus',views.aboutus,name="aboutus"),
     path('coupon',views.coupon,name="coupon"),
     path('gift_request',views.gift_request,name="gift_request"),
+    path('gift/accept/<int:id>',views.gift_accept,name="gift_accept"),
+    path('gift/reject/<int:id>',views.gift_reject,name="gift_reject"),
+    
+    # ============================= withdraw =============== 
+    path('withdraw',views.withdraw,name="withdraw"),
+    path('withdraw/accept/<int:id>',views.withdraw_accept,name="withdraw_accept"),
+    path('withdraw/reject/<int:id>',views.withdraw_reject,name="withdraw_reject"),
+    
     
     
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

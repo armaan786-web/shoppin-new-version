@@ -1,0 +1,9 @@
+{% extends 'Base/base.html' %}
+{% block main-content %}
+
+<form method ="POST">
+  {% csrf_token %}
+<input type="number" name="commssion">
+<button type="submit">submit</button>
+</form>
+{% endblock main-content %}

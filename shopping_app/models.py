@@ -88,11 +88,18 @@ class Booking(models.Model):
     def __str__(self):
         return self.user.user.username
 
-    def update_user_total_commission(self):
-        user_bookings = Booking.objects.filter(product=self.product)
-        total_commission = sum(booking.daily_wise_commission for booking in user_bookings)
+
+    @property
+    def total_purchase(self):
+        totalpurchase = Booking.objects.filter(user=self.user)
+        total_amount= sum(booking.product.price for booking in totalpurchase)   
+        return total_amount
+        
+    # def update_user_total_commission(self):
+    #     user_bookings = Booking.objects.filter(product=self.product)
+    #     total_commission = sum(booking.daily_wise_commission for booking in user_bookings)
        
-        return total_commission
+    #     return total_commission
     
    
 
@@ -141,14 +148,39 @@ coupen_request = (
     ("Reject","Reject"),
     
 ) 
+
 class CouponCode(models.Model):
     user = models.ForeignKey(to=Profile,on_delete=CASCADE)
     coupon_code = models.CharField(max_length=50) 
-    date = models.DateField(auto_now_add=True)
+    gift_amt = models.IntegerField(default=0,null=True,blank=True)   
     coupen_request = models.CharField(max_length=50,choices=coupen_request,default="Pending")
+    date = models.DateField(auto_now_add=True)
+    last_updated = models.DateField(auto_now_add=False, auto_now=True, null=True)
 
+    @property
+    def total_gift(self):
+        user_gift = CouponCode.objects.filter(user=self.user,coupen_request="Accept")
+        total_gift= sum(coupon.gift_amt for coupon in user_gift)   
+        # total_amount = total_amount-self.remaining_amount
+    
+        return total_gift
+
+    def __str__(self):
+        return self.user.user.first_name
     
 
+withdraw_request = (
+    ("Pending","Pending"),
+    ("Accept","Accept"),
+    ("Reject","Reject"),
+    
+) 
+class Withdraw(models.Model):
+    user = models.ForeignKey(to=Profile,on_delete=CASCADE)
+    amount = models.IntegerField(default=0)
+    withdraw_request = models.CharField(max_length=50,choices=withdraw_request,default="Pending")
+    date = models.DateField(auto_now_add=True)
+    last_updated = models.DateField(auto_now_add=False, auto_now=True, null=True)
     def __str__(self):
         return self.user.user.first_name
     

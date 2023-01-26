@@ -10820,7 +10820,7 @@ body {
   font-size: 16px;
   overflow-y: auto;
   min-height: 100%;
-  background: url("../img/bgshapes.png") repeat-x center top, url("../img/bgshapes2.png") repeat-x center bottom;
+  background: url("../assets/img/bgshapes.png") repeat-x center top, url("../assets/img/bgshapes2.png") repeat-x center bottom;
   /* background: url("../assets/img/bgshapes.png") repeat-x center top, url("../assets/img/bgshapes2.png") repeat-x center bottom; */
   background-attachment: fixed, fixed;
   background-color: #F8EBEE;

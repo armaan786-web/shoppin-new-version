@@ -11,7 +11,11 @@
         <th scope="col">UserName</th>
         <th scope="col">Mobile Number</th>
         <th scope="col">Coupon Code</th>
+        <th scope="col">Gift Amount</th>
         <th scope="col">Date</th>
+        <th scope="col">Last Updated</th>
+        
+        <th scope="col">Add Gift Amt</th>
         <th scope="col">Status</th>
         
         
@@ -25,10 +29,19 @@
         <td>{{i.user.user.first_name}}</td>
         <td>{{i.user.mobile}}</td>
         <td>{{i.coupon_code}}</td>
+        <td>{{i.gift_amt}}</td>
         <td>{{i.date}}</td>
+        <td>{{i.last_updated}}</td>
+        {% if i.coupen_request == "Pending" %}
+        <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{i.id}}" disabled>Add Gift Amt</button></td>
+        {% elif i.coupen_request == "Reject" %}
+        <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{i.id}}" disabled>Add Gift Amt</button></td>
+        {% else %}
+        <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{i.id}}" >Add Gift Amt</button></td>
+        {% endif %}
         {% comment %} <td></td> {% endcomment %}
         {% if i.coupen_request == "Pending" %}
-        <td><a href="{% url 'recharge_status' i.id %}"><span class="label-success label label-default"><button class="btn-success no-border">Accept</button></span></a> <a href="{% url 'walletreject' i.id%}"><span class="label-danger label label-default pull-right"><button class="btn-danger no-border">Reject</button></span></a>
+        <td><a href="{% url 'gift_accept' i.id %}"><span class="label-success label label-default"><button class="btn-success no-border">Accept</button></span></a> <a href="{% url 'gift_reject' i.id%}"><span class="label-danger label label-default pull-right"><button class="btn-danger no-border">Reject</button></span></a>
         {% elif i.coupen_request == "Accept" %}
         <td><span class="label-success label label-default" disabled>Accept</span></td>
         {% comment %} <span class="label-success label label-default">Accepted</span> {% endcomment %}
@@ -38,6 +51,29 @@
         
         
     </tr>
+
+    <div class="modal fade" id="staticBackdrop{{i.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Add Gift Amount</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form  method="POST" >
+              {% csrf_token %}
+             <input type="text" value="{{i.id}}" name="gift_id" hidden>
+              <input type="number" class="form-control" name="gift_amt" placeholder="Enter Gift Amount" required>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Send</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
     {% endfor %}
      
     </tbody>

@@ -27,9 +27,9 @@
         <td>{{i.amount}}</td>
         <td>{{i.date}}</td>
         {% comment %} <td></td> {% endcomment %}
-        {% if i.wallet_request == "Pending" %}
-        <td><a href="{% url 'recharge_status' i.id %}"><span class="label-success label label-default"><button class="btn-success no-border">Accept</button></span></a> <a href="{% url 'walletreject' i.id%}"><span class="label-danger label label-default pull-right"><button class="btn-danger no-border">Reject</button></span></a>
-        {% elif i.wallet_request == "Accept" %}
+        {% if i.withdraw_request == "Pending" %}
+        <td><a href="{% url 'withdraw_accept' i.id %}"><span class="label-success label label-default"><button class="btn-success no-border">Accept</button></span></a> <a href="{% url 'withdraw_reject' i.id%}"><span class="label-danger label label-default pull-right"><button class="btn-danger no-border">Reject</button></span></a>
+        {% elif i.withdraw_request == "Accept" %}
         <td><span class="label-success label label-default" disabled>Accept</span></td>
         {% comment %} <span class="label-success label label-default">Accepted</span> {% endcomment %}
         {% else %} 

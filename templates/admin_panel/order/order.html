@@ -18,6 +18,7 @@
         <th scope="col">Daily Commission</th>
         <th scope="col">product_img</th>
         <th scope="col">Status</th>
+        <th scope="col">Edit</th>
       </tr>
     </thead>
     <tbody>
@@ -32,9 +33,10 @@
         <td>{{i.product.description}}</td>
         <td>{{i.product.duration}} days</td>
         <td>{{i.product.commission}}%</td>
-        <td>{{i.update_user_total_commission}}</td>
+        <td>{{i.daily_wise_commission}}</td>
         <td><img src="{{i.product.product_img.url}}" alt="dd" class="w-25"></td>
         <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{i.id}}">Add Commission</button></td>
+        <td><a href="{% url 'editcommission' i.id %}">Edit</a></td>
     </tr>
 
     <!-- Modal -->
@@ -48,8 +50,9 @@
       <div class="modal-body">
         <form  method="POST" >
           {% csrf_token %}
-         <input type="text" value="{{i.id}}" name="prod_id">
-          <input type="number" class="form-control" name="commission">
+         <input type="text" value="{{i.id}}" name="booking_id" hidden>
+         
+          <input type="number" class="form-control" name="commission_amt" placeholder="Enter your commission amount">
         
       </div>
       <div class="modal-footer">
