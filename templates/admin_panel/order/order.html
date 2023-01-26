@@ -18,7 +18,7 @@
         <th scope="col">Daily Commission</th>
         <th scope="col">product_img</th>
         <th scope="col">Status</th>
-        <th scope="col">Edit</th>
+        {% comment %} <th scope="col">Edit</th> {% endcomment %}
       </tr>
     </thead>
     <tbody>
@@ -36,7 +36,7 @@
         <td>{{i.daily_wise_commission}}</td>
         <td><img src="{{i.product.product_img.url}}" alt="dd" class="w-25"></td>
         <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{i.id}}">Add Commission</button></td>
-        <td><a href="{% url 'editcommission' i.id %}">Edit</a></td>
+        {% comment %} <td><a href="{% url 'editcommission' i.id %}">Edit</a></td> {% endcomment %}
     </tr>
 
     <!-- Modal -->
