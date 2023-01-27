@@ -1,30 +1,41 @@
 {% extends 'Base/base.html' %}
 {% block main-content %}
+<div class="row justify-content-between wizard-wrapper mb-4 shadow-sm ">
 
-<div class="table-responsive">
-<table class="table ">
+  <table class="table">
+    <center>
+      <h1>Daily Wise Commission</h1>
+    </center>
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Product Name</th>
         <th scope="col">Income</th>
-       
+        {% comment %} <td scope="col">Date</td>
+        <td scope="col">Last Updated</td> {% endcomment %}
       </tr>
     </thead>
     <tbody>
-        {% for i in recharge %}
+        {% for i in daily_commission %}
+        {% if i.daily_wise_commission != 0 %}
       <tr>
         
-        {% comment %} <th scope="row">{{forloop.counter}}</th> {% endcomment %}
-        <td>abc</td>
-        <td>abc</td>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{i.product}}</td>
+        <td>{{i.daily_wise_commission}}</td>
+        {% comment %} <td>{{i.date}}</td>
+        <td>{{i.last_updated}}</td>
+        <td>{{i.coupen_request}}</td> {% endcomment %}
         
         
-        <td>{{i.recharge_request}}</td>
     </tr>
+    {% endif %}
     {% endfor %}
+    
      
     </tbody>
   </table>
 </div>
+
+
 {% endblock main-content %}

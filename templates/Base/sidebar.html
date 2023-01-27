@@ -4,9 +4,11 @@
     <div class="closemenu text-opac">Close Menu</div>
     <div class="sidebar">
         <div class="row mt-4 mb-3">
-            
+
             <div class="col align-self-center ps-0">
-                <center><h6 class="mb-0">{{user.first_name}}</h6></center>
+                <center>
+                    <h6 class="mb-0">{{user.first_name}}</h6>
+                </center>
                 <hr>
                 {% comment %} <p class="text-opac">Australia, UK</p> {% endcomment %}
             </div>
@@ -33,41 +35,49 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item nav-link active" href="{% url 'recharge_history' %}">
-                                    <div class="avatar avatar-40 rounded icon"><i class="bi bi-currency-exchange"></i></div>
+                                    <div class="avatar avatar-40 rounded icon"><i class="bi bi-currency-exchange"></i>
+                                    </div>
                                     <div class="col">Recharge Transactions</div>
-                                   
+
                                 </a></li>
                             <li><a class="dropdown-item nav-link" href="{% url 'withdraw_transaction' %}">
                                     <div class="avatar avatar-40 rounded icon"><i class="bi bi-binoculars"></i></div>
                                     <div class="col">Withdraw Transactions</div>
                                     <div class="arrow"><i class="bi bi-arrow-right"></i></div>
                                 </a></li>
-                            <li><a class="dropdown-item nav-link" href="{% url 'commision' %}">
+                            <li>
+                                <a class="dropdown-item nav-link" href="{% url 'commision' %}">
                                     <div class="avatar avatar-40 rounded icon"><i class="bi bi-cash-coin"></i></div>
                                     <div class="col">Commissions</div>
-                                    
-                                </a></li>
+
+                                </a>
+                            </li>
 
                             <li><a class="dropdown-item nav-link" href="{% url 'myorder' %}">
                                     <div class="avatar avatar-40 rounded icon"><i class="bi bi-bag"></i></div>
                                     <div class="col">Orders</div>
-                                   
+
+                                </a></li>
+                            <li><a class="dropdown-item nav-link" href="{% url 'gift' %}">
+                                    <div class="avatar avatar-40 rounded icon"><i class="bi bi-bag"></i></div>
+                                    <div class="col">Gift</div>
+
                                 </a></li>
 
 
                         </ul>
                     </li>
-                   
-                  
-                    
-                   
 
 
-                   
 
-                   
-                    
-                   
+
+
+
+
+
+
+
+
 
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'team'  %}" tabindex="-1">
@@ -112,12 +122,13 @@
                         <ul class="dropdown-menu">
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'adminorder' %}" tabindex="-1">
-                                    <div class="avatar avatar-40 rounded icon"><i class="bi bi-box-arrow-right"></i></div>
+                                    <div class="avatar avatar-40 rounded icon"><i class="bi bi-box-arrow-right"></i>
+                                    </div>
                                     <div class="col">Order List</div>
                                     <div class="arrow"><i class="bi bi-arrow-right"></i></div>
                                 </a>
                             </li>
-                            
+
 
 
 

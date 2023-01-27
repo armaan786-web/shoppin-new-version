@@ -26,7 +26,7 @@ urlpatterns = [
 
 
     # -----------------------Withdraw Url----------------------------
-    path("withdraw/transaction",views.withdraw_transaction,name="withdraw_transaction"),
+    
 
 
     # --------------------------- Orders Url ---------------------
@@ -79,9 +79,14 @@ urlpatterns = [
     
     # ============================= withdraw =============== 
     path('withdraw',views.withdraw,name="withdraw"),
+    path("withdraw/transaction",views.withdraw_transaction,name="withdraw_transaction"),
     path('withdraw/accept/<int:id>',views.withdraw_accept,name="withdraw_accept"),
     path('withdraw/reject/<int:id>',views.withdraw_reject,name="withdraw_reject"),
     
+
+    # ====================================== gift ====================
+
+    path('gift/',views.gift,name="gift"),
     
     
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

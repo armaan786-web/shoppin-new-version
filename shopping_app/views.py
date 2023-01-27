@@ -297,11 +297,6 @@ def recharge_history(request):
     recharge = Recharge.objects.filter(user=user)
     return render(request,'transaction/recharge_history.html',{'recharge':recharge})
 
-def withdraw_transaction(request):
-    # recharge = Recharge.objects.all()
-    return render(request,'transaction/withdraw_transaction.html')
-
-
 
 def booking(request):
     user = Profile.objects.get(user=request.user)
@@ -429,13 +424,15 @@ def kyc(request):
             kyc.save()
         except:
             messages.error(request,"something is error Try Again !!")
-    kyc = Kyc.objects.all()   
+    kyc = Kyc.objects.filter(user=user)   
     return render(request,'kyc/kyc.html',{'kyc':kyc})
 
 
 
 def commision(request):
-    return render(request,'commission/commission.html')
+    user = Profile.objects.get(user=request.user)
+    daily_commission = Booking.objects.filter(user=user)
+    return render(request,'commission/commission.html',{'daily_commission':daily_commission})
 
 
 def admin_orders(request):
@@ -502,7 +499,7 @@ def walletreject(request,id):
 
 def admin_all_users(request):
     profile = Profile.objects.all()
-    paginator = Paginator(profile, 5)
+    paginator = Paginator(profile, 1)
     page = request.GET.get('page')
     profiles = paginator.get_page(page)
     
@@ -607,3 +604,22 @@ def withdraw_reject(request,id):
     wallet.withdraw_request= "Reject"
     wallet.save()
     return redirect('walletrequest')
+
+
+def withdraw_detail(request):
+    user =Profile.objects.get(user=request.user)
+    withdraw =Withdraw.objects.filter(user=user)
+    return render(request,'withdraw/withdraw_detail.html',{'withdraw':withdraw})
+
+def gift(request):
+    user = Profile.objects.get(user=request.user)
+    user_gift= CouponCode.objects.filter(user=user)
+
+    return render(request,'userGift/gift_detail.html',{'user_gift':user_gift})
+
+
+def withdraw_transaction(request):
+    user = Profile.objects.get(user=request.user)
+    withdraw = Withdraw.objects.filter(user=user)
+    return render(request,'transaction/withdraw_transaction.html',{'withdraw':withdraw})
+

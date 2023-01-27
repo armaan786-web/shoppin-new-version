@@ -4,11 +4,12 @@
 
   <table class="table">
     <center>
-      <h1>Withdraw Details</h1>
+      <h1>Coupon Gift</h1>
     </center>
     <thead>
       <tr>
         <th scope="col">#</th>
+        <th scope="col">Coupon Code</th>
         <th scope="col">Amount</th>
         <td scope="col">Date</td>
         <td scope="col">Last Updated</td>
@@ -16,14 +17,15 @@
       </tr>
     </thead>
     <tbody>
-        {% for i in withdraw %}
+        {% for i in user_gift %}
       <tr>
         
         <th scope="row">{{forloop.counter}}</th>
-        <td>{{i.amount}}</td>
+        <td>{{i.coupon_code}}</td>
+        <td>{{i.gift_amt}}</td>
         <td>{{i.date}}</td>
         <td>{{i.last_updated}}</td>
-        <td>{{i.withdraw_request}}</td>
+        <td>{{i.coupen_request}}</td>
         
         <td></td>
     </tr>
